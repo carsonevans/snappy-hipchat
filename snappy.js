@@ -8,8 +8,17 @@ function contact_created(request,response) {
         console.log(request);
     }
 
-    response.writeHead('200', {"Content-Type": "text/plain"});
-    response.write("Just playing for now...");
+    request.on('data', function(chunk) {
+      console.log("Received body data:");
+      console.log(chunk);
+    });
+
+    request.on('end', function() {
+      // empty 200 OK response for now
+      response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+      response.end();
+    });
+
     return response;
 }
 
@@ -20,8 +29,17 @@ function message_incoming(request,response) {
         console.log(request);
     }
 
-    response.writeHead('200', {"Content-Type": "text/plain"});
-    response.write("Just playing for now...");
+    request.on('data', function(chunk) {
+      console.log("Received body data:");
+      console.log(chunk);
+    });
+
+    request.on('end', function() {
+      // empty 200 OK response for now
+      response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+      response.end();
+    });
+
     return response;
 }
 
@@ -32,8 +50,17 @@ function message_outgoing(request,response) {
         console.log(request);
     }
 
-    response.writeHead('200', {"Content-Type": "text/plain"});
-    response.write("Just playing for now...");
+    request.on('data', function(chunk) {
+      console.log("Received body data:");
+      console.log(chunk);
+    });
+
+    request.on('end', function() {
+      // empty 200 OK response for now
+      response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+      response.end();
+    });
+
     return response;
 }
 
@@ -44,8 +71,17 @@ function message_private(request,response) {
         console.log(request);
     }
 
-    response.writeHead('200', {"Content-Type": "text/plain"});
-    response.write("Just playing for now...");
+    request.on('data', function(chunk) {
+      console.log("Received body data:");
+      console.log(chunk);
+    });
+
+    request.on('end', function() {
+      // empty 200 OK response for now
+      response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+      response.end();
+    });
+
     return response;
 }
 
@@ -56,8 +92,17 @@ function tags_changed(request,response) {
         console.log(request);
     }
 
-    response.writeHead('200', {"Content-Type": "text/plain"});
-    response.write("Just playing for now...");
+    request.on('data', function(chunk) {
+      console.log("Received body data:");
+      console.log(chunk);
+    });
+
+    request.on('end', function() {
+      // empty 200 OK response for now
+      response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+      response.end();
+    });
+
     return response;
 }
 
@@ -68,8 +113,17 @@ function ticket_created(request,response) {
         console.log(request);
     }
 
-    response.writeHead('200', {"Content-Type": "text/plain"});
-    response.write("Just playing for now...");
+    request.on('data', function(chunk) {
+      console.log("Received body data:");
+      console.log(chunk);
+    });
+
+    request.on('end', function() {
+      // empty 200 OK response for now
+      response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+      response.end();
+    });
+
     return response;
 }
 
@@ -80,8 +134,17 @@ function ticket_replied(request,response) {
         console.log(request);
     }
 
-    response.writeHead('200', {"Content-Type": "text/plain"});
-    response.write("Just playing for now...");
+    request.on('data', function(chunk) {
+      console.log("Received body data:");
+      console.log(chunk);
+    });
+
+    request.on('end', function() {
+      // empty 200 OK response for now
+      response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+      response.end();
+    });
+
     return response;
 }
 
@@ -92,8 +155,17 @@ function ticket_waiting(request,response) {
         console.log(request);
     }
 
-    response.writeHead('200', {"Content-Type": "text/plain"});
-    response.write("Just playing for now...");
+    request.on('data', function(chunk) {
+      console.log("Received body data:");
+      console.log(chunk);
+    });
+
+    request.on('end', function() {
+      // empty 200 OK response for now
+      response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+      response.end();
+    });
+
     return response;
 }
 
