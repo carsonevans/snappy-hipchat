@@ -10,55 +10,61 @@ var hipchat = require('./hipchat.js');
 // }
 
 function message_incoming(data) {
-    var message = 'New incoming message on ticket #' + data.ticket_id + ' by ' + data.creator.value + ':<br />'
+    console.log('message_incoming: ' + querystring.stringify(data));
+    var message = 'Ticket #' + data.ticket_id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
+    message += '- Incoming message from ' + data.creator.value + ':<br />'
     message += '<em>' + data.content + '</em><br />';
     hipchat.send('html', message);
 }
 
 function message_outgoing(data) {
-    var message = 'New outgoing message on ticket #' + data.ticket_id + ' by ' + data.creator.value + ':<br />'
+    console.log('message_outgoing: ' + querystring.stringify(data));
+    var message = 'Ticket #' + data.ticket_id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
+    message += '- Outgoing message from ' + data.creator.value + ':<br />'
     message += '<em>' + data.content + '</em><br />';
     hipchat.send('html', message);
 }
 
 function message_private(data) {
-    var message = 'New private message on ticket #' + data.ticket_id + ' by ' + data.creator.value + ':<br />'
+    console.log('message_private: ' + querystring.stringify(data));
+    var message = 'Ticket #' + data.ticket_id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
+    message += '- Private message from ' + data.creator.value + ':<br />'
     message += '<em>' + data.content + '</em><br />';
     hipchat.send('html', message);
 }
 
-function tags_changed(data) {
-    var message = 'Ticket tags updated:<br />'
-    message += 'Subject: ' + data.default_subject + '<br />';
-    message += 'From: ' + data.opener.value + '<br />';
-    if (data.added) {
-        message += 'Added: ' + data.added + '<br />';
-    }
-    if (data.added) {
-        message += 'Removed: ' + data.removed + '<br />';
-    }
+// function tags_changed(data) {
+//     var message = 'Ticket tags updated:<br />'
+//     message += 'Subject: ' + data.default_subject + '<br />';
+//     //message += 'From: ' + data.opener.value + '<br />';
+//     if (data.added) {
+//         message += 'Added: ' + data.added + '<br />';
+//     }
+//     if (data.added) {
+//         message += 'Removed: ' + data.removed + '<br />';
+//     }
 
-    hipchat.send('html', message);
-}
+//     hipchat.send('html', message);
+// }
 
 function ticket_created(data) {
-    var message = 'Ticket created:<br />'
-    message += 'Subject: ' + data.default_subject + '<br />';
-    message += 'From: ' + data.opener.value;
+    console.log('ticket_created: ' + querystring.stringify(data));
+    var message = 'Ticket #' + data.ticket_id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
+    message += '- Created';
     hipchat.send('html', message);
 }
 
 function ticket_replied(data) {
-    var message = 'Ticket marked replied:<br />'
-    message += 'Subject: ' + data.default_subject + '<br />';
-    message += 'From: ' + data.opener.value;
+    console.log('ticket_replied: ' + querystring.stringify(data));
+    var message = 'Ticket #' + data.ticket_id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
+    message += '- Marked Replied';
     hipchat.send('html', message);
 }
 
 function ticket_waiting(data) {
-    var message = 'Ticket marked waiting:<br />'
-    message += 'Subject: ' + data.default_subject + '<br />';
-    message += 'From: ' + data.opener.value;
+    console.log('ticket_waiting: ' + querystring.stringify(data));
+    var message = 'Ticket #' + data.ticket_id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
+    message += '- Marked Waiting';
     hipchat.send('html', message);
 }
 
@@ -67,7 +73,7 @@ function ticket_waiting(data) {
 exports.message_incoming = message_incoming;
 exports.message_outgoing = message_outgoing;
 exports.message_private = message_private;
-exports.tags_changed = tags_changed;
+//exports.tags_changed = tags_changed;
 exports.ticket_created = ticket_created;
 exports.ticket_replied = ticket_replied;
 exports.ticket_waiting = ticket_waiting;
