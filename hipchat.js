@@ -1,8 +1,7 @@
 
-function send(from, message_format, message) {
+function send(message_format, message) {
 
     var settings = require('./configuration.js');
-    console.log(settings);
     var querystring = require('querystring');
     var http = require('http');
 
@@ -10,7 +9,7 @@ function send(from, message_format, message) {
     var post_data = querystring.stringify({
       'auth_token' : settings.hipchat.auth_token,
       'room_id': settings.hipchat.room_id,
-      'from': from,
+      'from':  settings.hipchat.from,
       'message_format' : message_format,
       'message' : message
     });

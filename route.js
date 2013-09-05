@@ -1,4 +1,5 @@
 var snappy = require("./snappy");
+var settings = require('./configuration.js');
 
 function route(pathname, request, response) {
 
@@ -7,8 +8,6 @@ function route(pathname, request, response) {
 
     // replace all other slahes with underscores
     pathname = pathname.replace(/\//g,'_');
-
-    console.log(snappy[pathname]);;
 
     if (typeof(snappy[pathname]) === 'function') {
         response = snappy[pathname](request,response);
