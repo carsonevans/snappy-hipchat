@@ -12,25 +12,28 @@ var hipchat = require('./hipchat.js');
 
 function message_incoming(data) {
     console.log('message_incoming: ' + util.inspect(data));
-    var message = 'Ticket #' + data.note.ticket_id + ' :: <em>' + data.note.ticket.default_subject + '</em> (' + data.note.ticket.opener.first_name + ' ' + data.note.ticket.opener.last_name + ')<hr />';
-    message += '- Incoming message from ' + data.creator.value + ':<br />'
-    message += '<em>' + data.content + '</em><br />';
+    var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.note.ticket_id + '">' + data.note.ticket_id + '</a>, ';
+    message += data.note.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
+    message += '- Incoming message from ' + data.note.creator.value + ':<br />';
+    //message += '<em>' + data.content + '</em><br />';
     hipchat.send('html', message);
 }
 
 function message_outgoing(data) {
     console.log('message_outgoing: ' + util.inspect(data));
-    var message = 'Ticket #' + data.note.ticket_id + ' :: <em>' + data.note.ticket.default_subject + '</em> (' + data.note.ticket.opener.first_name + ' ' + data.note.ticket.opener.last_name + ')<hr />';
-    message += '- Outgoing message from ' + data.creator.value + ':<br />'
+    var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.note.ticket_id + '">' + data.note.ticket_id + '</a>, ';
+    message += data.note.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
+    message += '- Outgoing message from ' + data.note.creator.value + ':<br />';
     message += '<em>' + data.content + '</em><br />';
     hipchat.send('html', message);
 }
 
 function message_private(data) {
     console.log('message_private: ' + util.inspect(data));
-    var message = 'Ticket #' + data.note.ticket_id + ' :: <em>' + data.note.ticket.default_subject + '</em> (' + data.note.ticket.opener.first_name + ' ' + data.note.ticket.opener.last_name + ')<hr />';
-    message += '- Private message from ' + data.creator.value + ':<br />'
-    message += '<em>' + data.content + '</em><br />';
+    var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.note.ticket_id + '">' + data.note.ticket_id + '</a>, ';
+    message += data.note.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
+    message += ' - Private message from ' + data.note.creator.value + ':<br />';
+    //message += '<em>' + data.content + '</em><br />';
     hipchat.send('html', message);
 }
 
@@ -50,22 +53,28 @@ function message_private(data) {
 
 function ticket_created(data) {
     console.log('ticket_created: ' + util.inspect(data));
-    var message = 'Ticket #' + data.ticket.id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
-    message += '- Created';
+    var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.ticket.id + '">' + data.ticket.id + '</a>, ';
+    message += data.opener.value + ' - ' + data.ticket.default_subject + '<br />';
+    //message += ' - ' + data.ticket.summary;
+    message += ' - Created <br />';
     hipchat.send('html', message);
 }
 
 function ticket_replied(data) {
     console.log('ticket_replied: ' + util.inspect(data));
-    var message = 'Ticket #' + data.ticket.id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
-    message += '- Marked Replied';
+    var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.ticket.id + '">' + data.ticket.id + '</a>, ';
+    message += data.opener.value + ' - ' + data.ticket.default_subject + '<br />';
+    //message += ' - ' + data.ticket.summary;
+    message += ' - Marked Replied <br />';
     hipchat.send('html', message);
 }
 
 function ticket_waiting(data) {
     console.log('ticket_waiting: ' + util.inspect(data));
-    var message = 'Ticket #' + data.ticket.id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
-    message += '- Marked Waiting';
+    var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.ticket.id + '">' + data.ticket.id + '</a>, ';
+    message += data.opener.value + ' - ' + data.ticket.default_subject + '<br />';
+    //message += ' - ' + data.ticket.summary;
+    message += ' - Marked Waiting <br />';
     hipchat.send('html', message);
 }
 
