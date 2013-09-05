@@ -10,7 +10,19 @@ function route(pathname, request, response) {
     pathname = pathname.replace(/\//g,'_');
 
     if (typeof(snappy[pathname]) === 'function') {
-        response = snappy[pathname](request,response);
+        data = '';
+        request.on('data', function(chunk) {
+            data += chunk.toString();
+        });
+
+        request.on('end', function() {
+            // empty 200 OK
+            response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+
+            // send to defined snappy function
+            snappy[pathname](querystring.parse(data);)
+        });
+
     } else {
         response.writeHead(404, {"Content-Type": "text/plain"});
         response.write("Function " + pathname + " not supported.");
