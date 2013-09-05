@@ -1,5 +1,6 @@
 var snappy = require("./snappy");
 var settings = require('./configuration.js');
+var querystring = require('querystring');
 
 function route(pathname, request, response) {
 
