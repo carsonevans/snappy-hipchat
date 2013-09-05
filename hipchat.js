@@ -1,9 +1,8 @@
+var settings = require('./configuration.js');
+var querystring = require('querystring');
+var http = require('http');
 
 function send(message_format, message) {
-
-    var settings = require('./configuration.js');
-    var querystring = require('querystring');
-    var http = require('http');
 
     // Build the post string from an object
     var post_data = querystring.stringify({
