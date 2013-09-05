@@ -1,5 +1,6 @@
 
 var querystring = require('querystring');
+var util = require('util');
 var settings = require('./configuration.js');
 var hipchat = require('./hipchat.js');
 
@@ -10,7 +11,7 @@ var hipchat = require('./hipchat.js');
 // }
 
 function message_incoming(data) {
-    console.log('message_incoming: ' + querystring.stringify(data));
+    console.log('message_incoming: ' + util.inspect(data));
     var message = 'Ticket #' + data.ticket_id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
     message += '- Incoming message from ' + data.creator.value + ':<br />'
     message += '<em>' + data.content + '</em><br />';
@@ -18,7 +19,7 @@ function message_incoming(data) {
 }
 
 function message_outgoing(data) {
-    console.log('message_outgoing: ' + querystring.stringify(data));
+    console.log('message_outgoing: ' + util.inspect(data));
     var message = 'Ticket #' + data.ticket_id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
     message += '- Outgoing message from ' + data.creator.value + ':<br />'
     message += '<em>' + data.content + '</em><br />';
@@ -26,7 +27,7 @@ function message_outgoing(data) {
 }
 
 function message_private(data) {
-    console.log('message_private: ' + querystring.stringify(data));
+    console.log('message_private: ' + util.inspect(data));
     var message = 'Ticket #' + data.ticket_id + ' :: <em>' + data.ticket.default_subject + '</em> (' + data.ticket.opener.first_name + ' ' + data.ticket.opener.last_name + ')<hr />';
     message += '- Private message from ' + data.creator.value + ':<br />'
     message += '<em>' + data.content + '</em><br />';
@@ -48,21 +49,21 @@ function message_private(data) {
 // }
 
 function ticket_created(data) {
-    console.log('ticket_created: ' + querystring.stringify(data));
+    console.log('ticket_created: ' + util.inspect(data));
     var message = 'Ticket #' + data.id + ' :: <em>' + data.default_subject + '</em> (' + data.opener.first_name + ' ' + data.opener.last_name + ')<hr />';
     message += '- Created';
     hipchat.send('html', message);
 }
 
 function ticket_replied(data) {
-    console.log('ticket_replied: ' + querystring.stringify(data));
+    console.log('ticket_replied: ' + util.inspect(data));
     var message = 'Ticket #' + data.id + ' :: <em>' + data.default_subject + '</em> (' + data.opener.first_name + ' ' + data.opener.last_name + ')<hr />';
     message += '- Marked Replied';
     hipchat.send('html', message);
 }
 
 function ticket_waiting(data) {
-    console.log('ticket_waiting: ' + querystring.stringify(data));
+    console.log('ticket_waiting: ' + util.inspect(data));
     var message = 'Ticket #' + data.id + ' :: <em>' + data.default_subject + '</em> (' + data.opener.first_name + ' ' + data.opener.last_name + ')<hr />';
     message += '- Marked Waiting';
     hipchat.send('html', message);
