@@ -54,7 +54,7 @@ function message_private(data) {
 function ticket_created(data) {
     console.log('ticket_created: ' + util.inspect(data));
     var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.ticket.id + '">' + data.ticket.id + '</a>, ';
-    message += data.opener.value + ' - ' + data.ticket.default_subject + '<br />';
+    message += data.ticket.opener.value + ' - ' + data.ticket.default_subject + '<br />';
     //message += ' - ' + data.ticket.summary;
     message += ' - Created <br />';
     hipchat.send('html', message);
@@ -63,7 +63,7 @@ function ticket_created(data) {
 function ticket_replied(data) {
     console.log('ticket_replied: ' + util.inspect(data));
     var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.ticket.id + '">' + data.ticket.id + '</a>, ';
-    message += data.opener.value + ' - ' + data.ticket.default_subject + '<br />';
+    message += data.ticket.opener.value + ' - ' + data.ticket.default_subject + '<br />';
     //message += ' - ' + data.ticket.summary;
     message += ' - Marked Replied <br />';
     hipchat.send('html', message);
@@ -72,7 +72,7 @@ function ticket_replied(data) {
 function ticket_waiting(data) {
     console.log('ticket_waiting: ' + util.inspect(data));
     var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.ticket.id + '">' + data.ticket.id + '</a>, ';
-    message += data.opener.value + ' - ' + data.ticket.default_subject + '<br />';
+    message += data.ticket.opener.value + ' - ' + data.ticket.default_subject + '<br />';
     //message += ' - ' + data.ticket.summary;
     message += ' - Marked Waiting <br />';
     hipchat.send('html', message);
