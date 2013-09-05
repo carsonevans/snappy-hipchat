@@ -20,8 +20,11 @@ function route(pathname, request, response) {
             // empty 200 OK
             response.writeHead(200, "OK", {'Content-Type': 'text/html'});
 
+            parsed_data = querystring.parse(data);
+            // parsed_data appears to have data.event and data.data here.
+
             // send to defined snappy function
-            snappy[pathname](querystring.parse(data));
+            snappy[pathname](JSON.parse(parsed_data.data));
         });
 
     } else {
