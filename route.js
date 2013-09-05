@@ -20,7 +20,7 @@ function route(pathname, request, response) {
             response.writeHead(200, "OK", {'Content-Type': 'text/html'});
 
             // send to defined snappy function
-            snappy[pathname](querystring.parse(data);)
+            snappy[pathname](querystring.parse(data));
         });
 
     } else {
