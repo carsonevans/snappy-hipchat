@@ -12,17 +12,21 @@ var hipchat = require('./hipchat.js');
 
 function message_incoming(data) {
     console.log('message_incoming: ' + util.inspect(data));
+
     var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.note.ticket_id + '">' + data.note.ticket_id + '</a>, ';
-    message += data.note.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
+    message += data.note.ticket.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
     message += '- Incoming message from ' + data.note.creator.value + ':<br />';
     //message += '<em>' + data.content + '</em><br />';
     hipchat.send('html', message);
 }
 
 function message_outgoing(data) {
+
+    var creator = data.note.creator;
+
     console.log('message_outgoing: ' + util.inspect(data));
     var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.note.ticket_id + '">' + data.note.ticket_id + '</a>, ';
-    message += data.note.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
+    message += data.note.ticket.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
     message += '- Outgoing message from ' + data.note.creator.value + ':<br />';
     message += '<em>' + data.content + '</em><br />';
     hipchat.send('html', message);
@@ -31,7 +35,7 @@ function message_outgoing(data) {
 function message_private(data) {
     console.log('message_private: ' + util.inspect(data));
     var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.note.ticket_id + '">' + data.note.ticket_id + '</a>, ';
-    message += data.note.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
+    message += data.note.ticket.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
     message += ' - Private message from ' + data.note.creator.value + ':<br />';
     //message += '<em>' + data.content + '</em><br />';
     hipchat.send('html', message);
