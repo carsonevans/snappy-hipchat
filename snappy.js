@@ -15,8 +15,8 @@ function message_incoming(data) {
 
     var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.note.ticket_id + '">' + data.note.ticket_id + '</a>, ';
     message += data.note.ticket.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
-    message += '- Incoming message from ' + data.note.creator.value + ':<br />';
-    //message += '<em>' + data.content + '</em><br />';
+    message += '- Incoming message from ' + data.note.creator.email + ':<br />';
+    //message += '<em>' + data..note.summary + '</em><br />';
     hipchat.send('html', message);
 }
 
@@ -27,8 +27,8 @@ function message_outgoing(data) {
     console.log('message_outgoing: ' + util.inspect(data));
     var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.note.ticket_id + '">' + data.note.ticket_id + '</a>, ';
     message += data.note.ticket.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
-    message += '- Outgoing message from ' + data.note.creator.value + ':<br />';
-    message += '<em>' + data.content + '</em><br />';
+    message += '- Outgoing message from ' + data.note.creator.email + ':<br />';
+    //message += '<em>' + data.note.summary + '</em><br />';
     hipchat.send('html', message);
 }
 
@@ -36,24 +36,25 @@ function message_private(data) {
     console.log('message_private: ' + util.inspect(data));
     var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.note.ticket_id + '">' + data.note.ticket_id + '</a>, ';
     message += data.note.ticket.opener.value + ' - ' + data.note.ticket.default_subject + '<br />';
-    message += ' - Private message from ' + data.note.creator.value + ':<br />';
-    //message += '<em>' + data.content + '</em><br />';
+    message += ' - Private message from ' + data.note.creator.email + ':<br />';
+    //message += '<em>' + data..note.summary + '</em><br />';
     hipchat.send('html', message);
 }
 
-// function tags_changed(data) {
-//     var message = 'Ticket tags updated:<br />'
-//     message += 'Subject: ' + data.default_subject + '<br />';
-//     //message += 'From: ' + data.opener.value + '<br />';
-//     if (data.added) {
-//         message += 'Added: ' + data.added + '<br />';
-//     }
-//     if (data.added) {
-//         message += 'Removed: ' + data.removed + '<br />';
-//     }
+function tags_changed(data) {
+    console.log('tags_changed: ' + util.inspect(data));
+    // var message = 'Ticket #<a href="https://app.besnappy.com/home#ticket/' + data.note.ticket_id + '">' + data.note.ticket_id + '</a>, ';
+    // message += 'Subject: ' + data.default_subject + '<br />';
+    // //message += 'From: ' + data.opener.value + '<br />';
+    // if (data.added) {
+    //     message += 'Added: ' + data.added + '<br />';
+    // }
+    // if (data.added) {
+    //     message += 'Removed: ' + data.removed + '<br />';
+    // }
 
-//     hipchat.send('html', message);
-// }
+    // hipchat.send('html', message);
+}
 
 function ticket_created(data) {
     console.log('ticket_created: ' + util.inspect(data));
@@ -87,7 +88,7 @@ function ticket_waiting(data) {
 exports.message_incoming = message_incoming;
 exports.message_outgoing = message_outgoing;
 exports.message_private = message_private;
-//exports.tags_changed = tags_changed;
+exports.tags_changed = tags_changed;
 exports.ticket_created = ticket_created;
 exports.ticket_replied = ticket_replied;
 exports.ticket_waiting = ticket_waiting;
